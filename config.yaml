@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tcp-services
+  namespace: ingress-nginx
+data:
+  25: "iredmail-server/iredmail:25"
+  465: "iredmail-server/iredmail:465"
+  587: "iredmail-server/iredmail:587"
+  143: "iredmail-server/iredmail:143"
+  993: "iredmail-server/iredmail:993"
+  110: "iredmail-server/iredmail:110"
+  995: "iredmail-server/iredmail:995"
