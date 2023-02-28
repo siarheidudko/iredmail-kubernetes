@@ -1,6 +1,19 @@
 # iredmail-kubernetes
 Running the mail server with UI on minimal resources
 
+An unloaded server can run on about 10m CPU, 512Mi Memory.
+After installation will be available:
+roundcube (web ui): EMAIL_SERVER_HOSTNAME (ex: email.example.com)
+iredmail (admin ui): EMAIL_SERVER_HOSTNAME/iredadmin (ex: email.example.com/iredadmin)
+smtp/pop3/imap server: EMAIL_SERVER_HOSTNAME (ex: email.example.com)
+first user: postmaster@FIRST_MAIL_DOMAIN (ex: postmaster@example.com)
+first user password: FIRST_MAIL_DOMAIN_ADMIN_PASSWORD (ex: password)
+
+You will also need to set up 
+MX record (to receive mail) for the domain: FIRST_MAIL_DOMAIN (ex: example.com)
+A record (to get letsencrypt certificates) for the domain: EMAIL_SERVER_HOSTNAME (ex: email.example.com)
+SPF, DKIM and DMARK records for better delivery service
+
 This example binds the server to a node and is not a highly available deployment option. (due to the use of local storage)
 
 ```bash
