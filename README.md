@@ -1,18 +1,18 @@
 # iredmail-kubernetes
 Running the mail server with UI on minimal resources
 
-An unloaded server can run on about 10m CPU, 512Mi Memory.
+An unloaded server can run on about `10m` CPU, `512Mi` Memory.
 After installation will be available:
-roundcube (web ui): EMAIL_SERVER_HOSTNAME (ex: email.example.com)
-iredmail (admin ui): EMAIL_SERVER_HOSTNAME/iredadmin (ex: email.example.com/iredadmin)
-smtp/pop3/imap server: EMAIL_SERVER_HOSTNAME (ex: email.example.com)
-first user: postmaster@FIRST_MAIL_DOMAIN (ex: postmaster@example.com)
-first user password: FIRST_MAIL_DOMAIN_ADMIN_PASSWORD (ex: password)
+- roundcube (web ui): `EMAIL_SERVER_HOSTNAME` (ex: `email.example.com`)
+- iredmail (admin ui): `EMAIL_SERVER_HOSTNAME/iredadmin` (ex: `email.example.com/iredadmin`)
+- smtp/pop3/imap server: `EMAIL_SERVER_HOSTNAME` (ex: `email.example.com`)
+- first user: `postmaster@FIRST_MAIL_DOMAIN` (ex: `postmaster@example.com`)
+- first user password: `FIRST_MAIL_DOMAIN_ADMIN_PASSWORD` (ex: `password`)
 
-You will also need to set up 
-MX record (to receive mail) for the domain: FIRST_MAIL_DOMAIN (ex: example.com)
-A record (to get letsencrypt certificates) for the domain: EMAIL_SERVER_HOSTNAME (ex: email.example.com)
-SPF, DKIM and DMARK records for better delivery service
+You will also need to set up:
+- **MX** record (to receive mail) for the domain: `FIRST_MAIL_DOMAIN` (ex: `example.com`)
+- **A** record (to get letsencrypt certificates) for the domain: `EMAIL_SERVER_HOSTNAME` (ex: `email.example.com`)
+- **SPF**, **DKIM** and **DMARK** records for better delivery service
 
 This example binds the server to a node and is not a highly available deployment option. (due to the use of local storage)
 
@@ -64,7 +64,7 @@ EOL
 kubectl apply -f ingress-configmap.yaml
 ```
 
-Create ingress for email server (In order for the certificates to be successfully created, you must already have a DNS record of type A configured for the address EMAIL_SERVER_HOSTNAME)
+Create ingress for email server (In order for the certificates to be successfully created, you must already have a DNS record of type **A** configured for the address `EMAIL_SERVER_HOSTNAME`)
 ```bash
 tee /home/iredmail/ingress.yaml<<EOL
 apiVersion: networking.k8s.io/v1
@@ -108,7 +108,7 @@ kubectl patch deployment cert-manager-webhook -n cert-manager --type "json" -p '
   {"op":"add","path":"/spec/template/spec/containers/0/args/-","value": "--feature-gates=AdditionalCertificateOutputFormats=true"},
 ]'
 
-# (der is not needed)
+# der is not needed
 kubectl patch certificate iredmail-certs -n iredmail-server --type "json" -p '[
   {"op":"add","path":"/spec/additionalOutputFormats","value": [{"type": "CombinedPEM"},{"type": "DER"}]},
 ]'
@@ -162,7 +162,7 @@ EOL
 kubectl apply -f storage.yaml
 ```
 
-Create an iredmail deployment and service ()
+Create an iredmail deployment and service
 ```bash
 tee /home/iredmail/iredmail.yaml<<EOL
 apiVersion: v1
